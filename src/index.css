@@ -1,13 +1,302 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap');
 @import './styles/reset.css';
 
+:root {
+  --clr-gradient: linear-gradient(163.95deg, #6348fe 4.74%, #610595 88.83%);
+  --clr-violet: hsl(278, 68%, 11%);
+  --clr-light-grayish-violet: hsl(270, 3%, 87%);
+  --clr-dark-grayish-violet: hsl(279, 6%, 55%);
+  --clr-very-dark-violet: hsl(278, 68%, 11%);
+  --clr-white: hsl(0, 0%, 100%);
+  --clr-red: hsl(0, 100%, 66%);
+  --fs-bd-xs: 0.9rem;
+  --lh-bd-xs: 1.1rem;
+  --ls-bd-xs: 0.128rem;
+  --fs-bd-sm-md: 1.2rem;
+  --lh-bd-sm-md: 1.5rem;
+  --fs-bd-lg: 1.4rem;
+  --lh-bd-lg: 1.8rem;
+  --ls-bd-lg: 0.2rem;
+  --fs-hd-lg: 1.8rem;
+  --lh-hd-lg: 2.3rem;
+  --ls-hd-lg: 0.22rem;
+  --fs-hd-xl: 2.8rem;
+  --lh-hd-xl: 3.6rem;
+  --ls-hd-xl: 0.342222rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
 body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  padding: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* width: 100%; */
+  /* min-height: 100vh; */
+  margin: 0;
+  padding: 0;
+  /* padding: 3.2rem 1.6rem; */
+  /* background-color: var(--clr-very-dark-violet); */
+  background-image: url('./assets/bg-main-mobile.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  /* height: 24rem; */
+  /* border: 1px solid red; */
+  /* padding-inline: 2.4rem; */
+}
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  /* height: 100%; */
+  /* border: 1px solid orange; */
+  color: var(--clr-white);
+  /* top: 3.2rem; */
+}
+
+.card-back {
+  position: relative;
+  /* position: absolute;
+  background-image: url('./assets/bg-card-back.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  /* width: 85%; */
+  width: 28.6rem;
+  /* height: 100%; */
+  height: 15.7rem;
+  z-index: 1;
+  /* border: 1px solid yellow; */
+}
+
+.card-back::before {
+  position: absolute;
+  background-image: url('./assets/bg-card-back.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  content: '';
+  /* display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  align-self: flex-end;*/
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  /* border: 1px solid yellow; */
+}
+
+.card-back--card-sec {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 75%;
+}
+
+.card-front {
+  position: relative;
+  /* position: absolute;
+  background-image: url('./assets/bg-card-front.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center; */
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  align-self: flex-start;
+  /* width: 85%; */
+  width: 28.6rem;
+  /* height: 100%; */
+  height: 15.7rem;
+  z-index: 2;
+  /* flex-wrap: wrap; */
+  flex-direction: column;
+  row-gap: 2.6rem;
+  /* padding: 2.8rem 3.2rem; */
+  /* padding: 1.9rem; */
+  /* border: 1px solid blue; */
+  /* top: 9.4rem; */
+}
+
+.card-front::before {
+  content: '';
+  position: absolute;
+  background-image: url('./assets/bg-card-front.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+.card-front--logo {
+  width: 5.4rem;
+  height: 3rem;
+  /* border: 1px solid red; */
+}
+
+.card-front--card-numbers {
+  font-size: var(--fs-hd-lg);
+  line-height: var(--lh-hd-lg);
+  letter-spacing: var(--ls-hd-lg);
+  width: 100%;
+}
+
+.card-front--card-holder {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  text-transform: uppercase;
+  font-size: var(--fs-bd-xs);
+  line-height: var(--lh-bd-xs);
+  letter-spacing: var(--ls-bd-xs);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  /* min-height: 100vh;
+  flex-grow: 1; */
+  padding: 4.8rem 2.4rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  row-gap: 2rem;
+  /* border: 1px solid orange; */
+}
+
+label {
+  font-size: var(--fs-bd-sm-md);
+  line-height: var(--lh-bd-sm-md);
+  letter-spacing: var(--ls-bd-lg);
+  text-transform: uppercase;
+  width: 100%;
+}
+
+input {
+  display: flex;
+  padding: 1.2rem 1.6rem;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #dfdee0;
+  border-radius: 8px;
+  font-size: var(--fs-hd-lg);
+  line-height: var(--lh-hd-lg);
+}
+
+input::placeholder {
+  color: var(--clr-very-dark-violet);
+  opacity: 0.25;
+}
+
+.form--submit-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  /* border: 1px solid blue; */
+}
+
+button {
+  display: flex;
+  padding-block: 1.5rem;
+  background-color: var(--clr-very-dark-violet);
+  border-radius: 0.8rem;
+  color: var(--clr-white);
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.form--label-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  /* height: 100%; */
+  /* border: 1px solid red; */
+  row-gap: 0.9rem;
+}
+
+.form--row-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  /* height: 100%; */
+  /* border: 1px solid red; */
+  column-gap: 0.8rem;
+}
+
+.form--row-container.form--card-expiry-sec-container {
+  column-gap: 1.2rem;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* Utility Classes */
+.text-header-lg {
+  font-size: var(--fs-hd-lg);
+  line-height: var(--lh-hd-lg);
+  letter-spacing: var(--ls-hd-lg);
 }

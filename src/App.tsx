@@ -1,14 +1,25 @@
-import { Header } from 'components/Header';
-import { Button } from 'components/Button';
-import { ReactComponent as Logo } from 'assets/favicon.svg';
+import Header from 'components/Header';
+import Form from 'components/Form';
+import { useState } from 'react';
+import { Card } from 'types/Types';
 
 function App() {
+  const [card, setCard] = useState<Card | undefined>();
+  const [numbers, setNumbers] = useState<string>('0000 0000 0000 0000');
+  const [name, setName] = useState<string>('Jane Appleseed');
+  const [expiry, setExpiry] = useState<string>('00/00');
+  const [cvv, setCvv] = useState<string>('000');
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
+
   return (
-    <div className="App">
-      <Header title="hola" />
-      <Logo height={100} width={100} />
-      <Button onClick={() => alert('hola')}>Heyo</Button>
-    </div>
+    // <div className="App app-wrapper">
+    <>
+      <Header card={card} />
+      <main>
+        <Form card={card} setCard={setCard} />
+      </main>
+    </>
+    // </div>
   );
 }
 
