@@ -4,5 +4,5 @@ export interface CardForm {
   // expiration: string;
   monthExp: string
   yearExp: string
-  cvv: string
+  cvc: string
 }

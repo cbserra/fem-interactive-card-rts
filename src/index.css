@@ -283,10 +283,21 @@ input {
   padding: 1.2rem 1.6rem;
   width: 100%;
   background: #fff;
-  border: 2px solid #dfdee0;
+  border: 1px solid var(--clr-light-grayish-violet);
   border-radius: 8px;
   font-size: var(--fs-hd-lg);
   line-height: var(--lh-hd-lg);
+}
+
+input:focus,
+input:active,
+input:focus-visible,
+input:focus-within {
+  background: linear-gradient(to right, white, white),var(--clr-gradient);
+  /* border: 1px solid transparent; */
+  border-color: transparent;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
 }
 
 input::placeholder {
@@ -354,4 +365,19 @@ button {
   font-size: var(--fs-hd-lg);
   line-height: var(--lh-hd-lg);
   letter-spacing: var(--ls-hd-lg);
+}
+
+span.form-error {
+  display: block;
+  min-height: 1.5rem;
+  font-size: var(--fs-bd-sm-md);
+  line-height: var(--lh-bd-sm-md);
+  /* letter-spacing: var(--ls-bd-xs); */
+  color: var(--clr-red);
+  /* margin-top: 0.5rem; */
+  align-self: flex-start;
+}
+
+input.form-error {
+  border-color: var(--clr-red);
 }

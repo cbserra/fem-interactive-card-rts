@@ -16,8 +16,9 @@ const Form = (props: {
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     formState: { errors },
+
     setValue,
   } = props.methods
   const { card, setCard } = props
@@ -36,13 +37,19 @@ const Form = (props: {
           type="text"
           id="cardholder-name"
           placeholder="e.g. Jane Appleseed"
+          className={errors?.name ? 'form-error' : ''}
           {...register('name', {
-            required: true,
-            minLength: 3,
-            pattern: /^[a-zA-Z .]+$/,
+            required: "Can't be blank",
+            minLength: { value: 3, message: 'Must be at least 3 characters' },
+            pattern: {
+              value: /^[a-zA-Z .]+$/,
+              message: 'Wrong format; letters, spaces, and periods only',
+            },
+            // validate: (value) => value.length || "Can't be blank",
             onChange: (e) => setValue('name', e.target.value),
           })}
         />
+        <span className="form--cardholder-name-error form-error">{errors?.name?.message}</span>
       </div>
       <div className="form--label-input-container form--card-number-container">
         <label htmlFor="card-number">Card Number</label>
@@ -50,15 +57,17 @@ const Form = (props: {
           type="text"
           id="card-number"
           placeholder="e.g. 1234 5678 9123 0000"
+          className={errors?.numbers ? 'form-error' : ''}
           {...register('numbers', {
-            minLength: 16,
-            maxLength: 16,
-            pattern: /^[0-9]{16}$/,
-            required: true,
+            minLength: { value: 16, message: 'Must be 16 digits' },
+            maxLength: { value: 16, message: 'Must be 16 digits' },
+            pattern: { value: /^[0-9]{16}$/, message: 'Wrong format; digits only' },
+            required: "Can't be blank",
             // defaultValue: card?.numbers,
             onChange: (e) => setValue('numbers', e.target.value),
           })}
         />
+        <span className="form--card-number-error form-error">{errors?.numbers?.message}</span>
       </div>
       <div className="form--row-container form--card-expiry-sec-container">
         <div className="form--label-input-container form--card-expiry-container">
@@ -69,13 +78,14 @@ const Form = (props: {
               id="card-expiry--mm"
               maxLength={2}
               placeholder="MM"
+              className={errors?.monthExp ? 'form-error' : ''}
               {...register('monthExp', {
-                minLength: 1,
-                maxLength: 2,
-                min: 1,
-                max: 12,
-                pattern: /^[0-9]{1,2}$/,
-                required: true,
+                minLength: { value: 1, message: 'Must be at least 1 digit' },
+                maxLength: { value: 2, message: 'Must be at most 2 digits' },
+                min: { value: '01', message: 'Must be at least 1' },
+                max: { value: '12', message: 'Must be at most 12' },
+                pattern: { value: /^[0-9]{1,2}$/, message: 'Wrong format; digits only' },
+                required: "Can't be blank",
                 onChange: (e) => setValue('monthExp', e.target.value),
                 // setValueAs: (value: string) => {
                 //   console.log(value)
@@ -88,12 +98,13 @@ const Form = (props: {
               id="card-expiry--yy"
               maxLength={2}
               placeholder="YY"
+              className={errors?.yearExp ? 'form-error' : ''}
               {...register('yearExp', {
-                minLength: 2,
-                maxLength: 2,
+                minLength: { value: 1, message: 'Must be 2 digits' },
+                maxLength: { value: 2, message: 'Must be 2 digits' },
                 // min: 1,
                 // max: 12,
-                pattern: /^[0-9]{2}$/,
+                pattern: { value: /^[0-9]{2}$/, message: 'Wrong format; digits only' },
                 required: true,
                 onChange: (e) => setValue('yearExp', e.target.value),
                 // setValueAs: (value: string) => {
@@ -103,6 +114,9 @@ const Form = (props: {
               })}
             />
           </div>
+          <span className="form--card-expiry-error form-error">
+            {errors?.monthExp?.message || errors?.yearExp?.message}
+          </span>
         </div>
         <div className="form--label-input-container form--card-cvc-container">
           <label htmlFor="card-cvc">CVC</label>
@@ -111,16 +125,18 @@ const Form = (props: {
             id="card-cvc"
             maxLength={3}
             placeholder="e.g. 123"
-            {...register('cvv', {
-              minLength: 3,
-              maxLength: 3,
-              // min: 1,
+            className={errors?.cvc ? 'form-error' : ''}
+            {...register('cvc', {
+              minLength: { value: 3, message: 'Must be 3 digits' },
+              maxLength: { value: 3, message: 'Must be 3 digits' },
+              // min: {value: 1, message: 'Must be a number'},
               // max: 12,
-              pattern: /^[0-9]{3}$/,
-              required: true,
-              onChange: (e) => setValue('cvv', e.target.value),
+              pattern: { value: /^[0-9]{3}$/, message: 'Must be 3 digits' },
+              required: "Can't be blank",
+              onChange: (e) => setValue('cvc', e.target.value),
             })}
           />
+          <span className="form--card-cvc-error form-error">{errors?.cvc?.message}</span>
         </div>
       </div>
       <div className="form--submit-container">

@@ -1,14 +1,21 @@
 import React from 'react'
+import { FieldErrorsImpl } from 'react-hook-form'
 import cardLogo, { ReactComponent as CardLogo } from '../assets/card-logo.svg'
 import { CardForm } from '../types/Types'
 
-const Header = (props: { watchCardForm: CardForm; card: CardForm | undefined }) => {
-  const { watchCardForm: watch, card } = props
+const Header = (props: {
+  watchCardForm: CardForm
+  formErrors: FieldErrorsImpl<CardForm>
+  card: CardForm | undefined
+}) => {
+  const { watchCardForm, formErrors, card } = props
   return (
     <header>
       <div className="card-wrapper">
         <div className="card-back">
-          <div className="card-back--card-sec">{watch.cvv ? <>{watch.cvv}</> : '000'}</div>
+          <div className="card-back--card-sec">
+            {watchCardForm.cvc && !formErrors.cvc ? <>{watchCardForm.cvc}</> : '000'}
+          </div>
         </div>
         <div className="card-front">
           <div className="card-front--logo">
@@ -20,15 +27,27 @@ const Header = (props: { watchCardForm: CardForm; card: CardForm | undefined }) 
             </svg> */}
           </div>
           <div className="card-front--card-numbers">
-            {watch.numbers ? <>{watch.numbers}</> : '0000 0000 0000 0000'}
+            {watchCardForm.numbers && !formErrors.numbers ? (
+              <>{watchCardForm.numbers}</>
+            ) : (
+              '0000 0000 0000 0000'
+            )}
           </div>
           <div className="card-front--card-holder">
             <div className="card-front--card-holder-name">
-              {watch.name ? <>{watch.name}</> : 'Jane Appleseed'}
+              {watchCardForm.name && !formErrors.name ? (
+                <>{watchCardForm.name}</>
+              ) : (
+                'Jane Appleseed'
+              )}
             </div>
             <div className="card-front--card-holder-expiry">
-              {watch.monthExp ? <>{watch.monthExp}</> : '00'}/
-              {watch.yearExp ? <>{watch.yearExp}</> : '00'}
+              {watchCardForm.monthExp && !formErrors.monthExp ? (
+                <>{watchCardForm.monthExp}</>
+              ) : (
+                '00'
+              )}
+              /{watchCardForm.yearExp && !formErrors.yearExp ? <>{watchCardForm.yearExp}</> : '00'}
             </div>
           </div>
         </div>

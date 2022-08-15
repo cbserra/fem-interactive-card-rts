@@ -9,7 +9,7 @@ function App() {
   const [numbers, setNumbers] = useState<string>('0000 0000 0000 0000')
   const [name, setName] = useState<string>('Jane Appleseed')
   const [expiry, setExpiry] = useState<string>('00/00')
-  const [cvv, setCvv] = useState<string>('000')
+  const [cvc, setCvc] = useState<string>('000')
   const [isCompleted, setIsCompleted] = useState<boolean>(false)
 
   // const {
@@ -19,7 +19,7 @@ function App() {
   //   formState: { errors },
   // } = useForm<CardForm>()
 
-  const formMethods = useForm<CardForm>()
+  const formMethods = useForm<CardForm>({ mode: 'onBlur', reValidateMode: 'onChange' })
   const watchAll = formMethods.watch()
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function App() {
   return (
     // <div className="App app-wrapper">
     <>
-      <Header watchCardForm={watchAll} card={card} />
+      <Header watchCardForm={watchAll} formErrors={formMethods.formState.errors} card={card} />
       <main>
         <Form methods={formMethods} card={card} setCard={setCard} />
       </main>
