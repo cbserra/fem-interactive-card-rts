@@ -1,42 +1,39 @@
 import React from 'react'
-import {
-  SubmitHandler,
-  useForm,
-  UseFormRegister,
-  UseFormRegisterReturn,
-  UseFormReturn,
-} from 'react-hook-form'
+import { SubmitErrorHandler, SubmitHandler, UseFormReturn } from 'react-hook-form'
 import { CardForm } from '../types/Types'
+import MaskedInput from 'react-input-mask'
 
 const Form = (props: {
   methods: UseFormReturn<CardForm>
   card: CardForm | undefined
   setCard: React.Dispatch<React.SetStateAction<CardForm | undefined>>
+  isCompleted: boolean
+  setIsCompleted: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
   const {
     register,
     handleSubmit,
-    // watch,
-    formState: { errors },
-
+    formState: { errors, isDirty, isValid, isSubmitSuccessful },
     setValue,
   } = props.methods
-  const { card, setCard } = props
-  // const {
-  // register,
-  //   handleSubmit,
-  //   watch,
-  //   formState: { errors },
-  // } = useForm<CardForm>()
-  const onSubmit: SubmitHandler<CardForm> = (data) => console.log(data)
+  const { card, setCard, isCompleted, setIsCompleted } = props
+  const onSubmitHandler: SubmitHandler<CardForm> = (data: CardForm) => {
+    setCard(data)
+    setIsCompleted(isSubmitSuccessful)
+  }
+
+  const onErrorHandler: SubmitErrorHandler<CardForm> = (error: any) =>
+    console.error(error, isDirty, isValid)
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmitHandler, onErrorHandler)}>
       <div className="form--label-input-container form--cardholder-name-container">
         <label htmlFor="cardholder-name">Cardholder Name</label>
         <input
           type="text"
           id="cardholder-name"
           placeholder="e.g. Jane Appleseed"
+          aria-invalid={errors?.name ? 'true' : 'false'}
           className={errors?.name ? 'form-error' : ''}
           {...register('name', {
             required: "Can't be blank",
@@ -53,17 +50,18 @@ const Form = (props: {
       </div>
       <div className="form--label-input-container form--card-number-container">
         <label htmlFor="card-number">Card Number</label>
-        <input
-          type="text"
+        <MaskedInput
           id="card-number"
-          placeholder="e.g. 1234 5678 9123 0000"
+          // maskPlaceholder="e.g. 1234 5678 9123 0000"
+          aria-invalid={errors?.numbers ? 'true' : 'false'}
           className={errors?.numbers ? 'form-error' : ''}
+          mask="9999 9999 9999 9999"
+          placeholder="e.g. 1234 5678 9123 0000"
           {...register('numbers', {
-            minLength: { value: 16, message: 'Must be 16 digits' },
-            maxLength: { value: 16, message: 'Must be 16 digits' },
-            pattern: { value: /^[0-9]{16}$/, message: 'Wrong format; digits only' },
+            minLength: { value: 19, message: 'Must be 16 digits' },
+            maxLength: { value: 19, message: 'Must be 16 digits' },
+            pattern: { value: /^[0-9 ]{19}$/, message: 'Wrong format; digits only' },
             required: "Can't be blank",
-            // defaultValue: card?.numbers,
             onChange: (e) => setValue('numbers', e.target.value),
           })}
         />
@@ -74,10 +72,11 @@ const Form = (props: {
           <label htmlFor="card-expiry">Exp. Date (MM/YY)</label>
           <div className="form--row-container">
             <input
-              type="number"
+              type="text"
               id="card-expiry--mm"
               maxLength={2}
               placeholder="MM"
+              aria-invalid={errors?.monthExp ? 'true' : 'false'}
               className={errors?.monthExp ? 'form-error' : ''}
               {...register('monthExp', {
                 minLength: { value: 1, message: 'Must be at least 1 digit' },
@@ -94,10 +93,11 @@ const Form = (props: {
               })}
             />
             <input
-              type="number"
+              type="text"
               id="card-expiry--yy"
               maxLength={2}
               placeholder="YY"
+              aria-invalid={errors?.yearExp ? 'true' : 'false'}
               className={errors?.yearExp ? 'form-error' : ''}
               {...register('yearExp', {
                 minLength: { value: 1, message: 'Must be 2 digits' },
@@ -105,7 +105,7 @@ const Form = (props: {
                 // min: 1,
                 // max: 12,
                 pattern: { value: /^[0-9]{2}$/, message: 'Wrong format; digits only' },
-                required: true,
+                required: "Can't be blank",
                 onChange: (e) => setValue('yearExp', e.target.value),
                 // setValueAs: (value: string) => {
                 //   console.log(value)
@@ -121,16 +121,15 @@ const Form = (props: {
         <div className="form--label-input-container form--card-cvc-container">
           <label htmlFor="card-cvc">CVC</label>
           <input
-            type="number"
+            type="text"
             id="card-cvc"
             maxLength={3}
             placeholder="e.g. 123"
+            aria-invalid={errors?.cvc ? 'true' : 'false'}
             className={errors?.cvc ? 'form-error' : ''}
             {...register('cvc', {
               minLength: { value: 3, message: 'Must be 3 digits' },
               maxLength: { value: 3, message: 'Must be 3 digits' },
-              // min: {value: 1, message: 'Must be a number'},
-              // max: 12,
               pattern: { value: /^[0-9]{3}$/, message: 'Must be 3 digits' },
               required: "Can't be blank",
               onChange: (e) => setValue('cvc', e.target.value),
@@ -144,12 +143,6 @@ const Form = (props: {
           Confirm
         </button>
       </div>
-
-      {/* Completed state start
-
-        Thank you!
-        We've added your card details
-        Continue */}
     </form>
   )
 }

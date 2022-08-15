@@ -1,7 +1,12 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import { FieldErrorsImpl } from 'react-hook-form'
-import cardLogo, { ReactComponent as CardLogo } from '../assets/card-logo.svg'
+import cardLogo from '../assets/card-logo.svg'
 import { CardForm } from '../types/Types'
+
+const DEFAULT_CVC_VALUE = '000'
+const DEFAULT_CARD_NUMBERS_VALUE = '0000 0000 0000 0000'
+const DEFAULT_CARD_HOLDER_VALUE = 'Jane Appleseed'
+const DEFAULT_MONTH_YEAR_EXP_VALUE = '00'
 
 const Header = (props: {
   watchCardForm: CardForm
@@ -9,12 +14,18 @@ const Header = (props: {
   card: CardForm | undefined
 }) => {
   const { watchCardForm, formErrors, card } = props
+  const [localCard, setLocalCard] = useState<CardForm>((card || watchCardForm || {}) as CardForm)
+
+  useEffect(() => {
+    setLocalCard(card || watchCardForm || {})
+  }, [card, watchCardForm])
+
   return (
     <header>
       <div className="card-wrapper">
         <div className="card-back">
           <div className="card-back--card-sec">
-            {watchCardForm.cvc && !formErrors.cvc ? <>{watchCardForm.cvc}</> : '000'}
+            {localCard.cvc && !formErrors.cvc ? <>{localCard.cvc}</> : DEFAULT_CVC_VALUE}
           </div>
         </div>
         <div className="card-front">
@@ -27,27 +38,32 @@ const Header = (props: {
             </svg> */}
           </div>
           <div className="card-front--card-numbers">
-            {watchCardForm.numbers && !formErrors.numbers ? (
-              <>{watchCardForm.numbers}</>
+            {localCard.numbers && !formErrors.numbers ? (
+              <>{localCard.numbers}</>
             ) : (
-              '0000 0000 0000 0000'
+              DEFAULT_CARD_NUMBERS_VALUE
             )}
           </div>
           <div className="card-front--card-holder">
             <div className="card-front--card-holder-name">
-              {watchCardForm.name && !formErrors.name ? (
-                <>{watchCardForm.name}</>
+              {localCard.name && !formErrors.name ? (
+                <>{localCard.name}</>
               ) : (
-                'Jane Appleseed'
+                DEFAULT_CARD_HOLDER_VALUE
               )}
             </div>
             <div className="card-front--card-holder-expiry">
-              {watchCardForm.monthExp && !formErrors.monthExp ? (
-                <>{watchCardForm.monthExp}</>
+              {localCard.monthExp && !formErrors.monthExp ? (
+                <>{localCard.monthExp}</>
               ) : (
-                '00'
+                DEFAULT_MONTH_YEAR_EXP_VALUE
               )}
-              /{watchCardForm.yearExp && !formErrors.yearExp ? <>{watchCardForm.yearExp}</> : '00'}
+              /
+              {localCard.yearExp && !formErrors.yearExp ? (
+                <>{localCard.yearExp}</>
+              ) : (
+                DEFAULT_MONTH_YEAR_EXP_VALUE
+              )}
             </div>
           </div>
         </div>

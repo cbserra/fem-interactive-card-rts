@@ -256,7 +256,7 @@ main {
 
   /* min-height: 100vh;
   flex-grow: 1; */
-  padding: 9.1rem 2.4rem 4.8rem 2.4rem;
+  padding: 8.7rem 2.4rem 4.8rem 2.4rem;
 }
 
 form {
@@ -325,6 +325,11 @@ button {
   text-align: center;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+}
+
+.button--completed {
+  margin-top: 3.2rem;
 }
 
 .form--label-input-container {
@@ -355,6 +360,33 @@ button {
 .form--row-container.form--card-expiry-sec-container {
   column-gap: 1.2rem;
 }
+
+.form--completed {
+  row-gap: 1.6rem;
+}
+
+.form--completed > h1 {
+  font-size: var(--fs-hd-xl);
+  line-height: var(--lh-hd-xl);
+  letter-spacing: var(--ls-hd-xl);
+  text-transform: uppercase;
+  width: 100%;
+  text-align: center;
+  margin-top: 1.0rem;
+  /* margin-bottom: 0.8rem; */
+}
+
+.form--completed > h2 {
+  font-size: var(--fs-hd-lg);
+  line-height: var(--lh-hd-lg);
+  /* letter-spacing: var(--ls-hd-xl); */
+  /* text-transform: uppercase; */
+  width: 100%;
+  text-align: center;
+  color: var(--clr-dark-grayish-violet);
+  /* margin-bottom: 0.8rem; */
+}
+
 
 /* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
