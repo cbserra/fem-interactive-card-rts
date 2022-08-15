@@ -1,3 +1,4 @@
 {
-  "*.{tsx,ts}": ["eslint --cache ./src", "prettier --write --ignore-unknown ."]
+  "*.{tsx,ts}": ["eslint --cache ./src", "prettier --write --ignore-unknown ."],
+  "*.{css}": ["stylelint './src/**/*.css' --fix", "prettier --write --ignore-unknown ."]
 }
