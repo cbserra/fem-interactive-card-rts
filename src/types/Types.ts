@@ -1,6 +1,8 @@
-export interface Card {
-  numbers: string;
-  name: string;
-  expiration: string;
-  cvv: string;
+export interface CardForm {
+  numbers: string
+  name: string
+  // expiration: string;
+  monthExp: string
+  yearExp: string
+  cvv: string
 }

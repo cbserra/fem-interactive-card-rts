@@ -1,8 +1,8 @@
-import React from 'react';
-import { ReactComponent as CardLogo } from 'assets/card-logo.svg';
-import { Card } from 'types/Types';
+import React from 'react'
+import { ReactComponent as CardLogo } from '../assets/card-logo.svg'
+import { CardForm } from '../types/Types'
 
-const Header = (props: { card: Card | undefined }) => {
+const Header = (props: { card: CardForm | undefined }) => {
   return (
     <header>
       <div className="card-wrapper">
@@ -26,7 +26,7 @@ const Header = (props: { card: Card | undefined }) => {
         </div>
       </div>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
