@@ -1,7 +1,8 @@
 import Header from './components/Header'
 import Form from './components/Form'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CardForm } from './types/Types'
+import { useForm } from 'react-hook-form'
 
 function App() {
   const [card, setCard] = useState<CardForm | undefined>()
@@ -11,12 +12,26 @@ function App() {
   const [cvv, setCvv] = useState<string>('000')
   const [isCompleted, setIsCompleted] = useState<boolean>(false)
 
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   watch,
+  //   formState: { errors },
+  // } = useForm<CardForm>()
+
+  const formMethods = useForm<CardForm>()
+  const watchAll = formMethods.watch()
+
+  useEffect(() => {
+    console.error(formMethods.formState)
+  }, [formMethods.formState])
+
   return (
     // <div className="App app-wrapper">
     <>
-      <Header card={card} />
+      <Header watchCardForm={watchAll} card={card} />
       <main>
-        <Form card={card} setCard={setCard} />
+        <Form methods={formMethods} card={card} setCard={setCard} />
       </main>
     </>
     // </div>
