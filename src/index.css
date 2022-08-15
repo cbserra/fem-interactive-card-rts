@@ -108,6 +108,8 @@ header {
   /* border: 2px solid orange; */
   color: var(--clr-white);
   top: 3.2rem;
+
+  filter: drop-shadow(0px 39px 60px rgba(0, 0, 0, 0.142481));
 }
 
 .card-back {
@@ -158,6 +160,7 @@ header {
   align-items: center;
   justify-content: flex-end;
   width: 75%;
+  height: 3rem;
 }
 
 .card-front {
@@ -169,8 +172,8 @@ header {
   background-size: contain;
   background-position: center; */
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
   align-self: flex-start;
 
   /* width: 85%; */
@@ -182,7 +185,7 @@ header {
 
   /* flex-wrap: wrap; */
   flex-direction: column;
-  row-gap: 2.6rem;
+  row-gap: 1.7rem;
 
   /* padding: 2.8rem 3.2rem; */
 
@@ -205,6 +208,15 @@ header {
 }
 
 .card-front--logo {
+  /* width: 5.4rem; */
+  width: 85%;
+  height: 3rem;
+
+  /* border: 2px solid red; */
+  margin-top: 1.8rem;
+}
+
+.card-front--logo > img {
   width: 5.4rem;
   height: 3rem;
 
@@ -212,20 +224,27 @@ header {
 }
 
 .card-front--card-numbers {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
   font-size: var(--fs-hd-lg);
   line-height: var(--lh-hd-lg);
   letter-spacing: var(--ls-hd-lg);
   width: 100%;
+  /* width: 85%; */
+  margin-top: 2rem;
 }
 
 .card-front--card-holder {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  /* width: 100%; */
+  width: 85%;
   text-transform: uppercase;
   font-size: var(--fs-bd-xs);
   line-height: var(--lh-bd-xs);
   letter-spacing: var(--ls-bd-xs);
+  margin-bottom: 1.9rem;
 }
 
 main {
@@ -237,7 +256,7 @@ main {
 
   /* min-height: 100vh;
   flex-grow: 1; */
-  padding: 4.8rem 2.4rem;
+  padding: 9.1rem 2.4rem 4.8rem 2.4rem;
 }
 
 form {
@@ -326,9 +345,9 @@ button {
   column-gap: 1.2rem;
 }
 
-code {
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
+} */
 
 /* Utility Classes */
 .text-header-lg {
