@@ -21,7 +21,7 @@
     "test": "jest",
     "serve": "vite preview",
     "prepare": "husky install",
-    "commit": "commit",
+    "commit": "git-cz",
     "format": "prettier --write --ignore-unknown .",
     "lint": "eslint --cache ./src",
     "analyze": "source-map-explorer 'dist/assets/*.js'"
@@ -49,6 +49,10 @@
     "@typescript-eslint/parser": "^5.30.5",
     "@vitejs/plugin-react": "^1.3.2",
     "autoprefixer": "^10.4.7",
+    "commitizen": "^4.2.5",
+    "commitlint": "^17.0.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "cz-emoji": "1.3.2-canary.2",
     "eslint": "^8.19.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^3.2.5",
@@ -74,5 +78,17 @@
     "typescript": "^4.7.4",
     "vite": "^2.9.14",
     "vite-tsconfig-paths": "^3.5.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-emoji"
+    },
+    "cz-emoji": {}
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
   }
 }
