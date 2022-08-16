@@ -1,4 +1,5 @@
 {
   "*.{tsx,ts}": ["eslint --cache ./src", "prettier --write --ignore-unknown ."],
-  "*.css": ["stylelint './src/**/*.css' --fix", "prettier --write --ignore-unknown ."]
+  "*.css": ["stylelint './src/**/*.css' --fix", "prettier --write --ignore-unknown ."],
+  "*.md": ["markdownlint-cli2 '**/*.md' '#node_modules'"]
 }
