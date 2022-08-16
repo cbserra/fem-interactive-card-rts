@@ -2,7 +2,7 @@
 @import './styles/reset.css';
 
 :root {
-  --clr-gradient: linear-gradient(163.95deg, #6348fe 4.74%, #610595 88.83%);
+  --clr-gradient: linear-gradient(163.95deg, hsl(249, 99%, 64%) 4.74%, hsl(278, 94%, 30%) 88.83%);
   --clr-violet: hsl(278deg 68% 11%);
   --clr-light-grayish-violet: hsl(270deg 3% 87%);
   --clr-dark-grayish-violet: hsl(279deg 6% 55%);
@@ -102,6 +102,7 @@ header {
   justify-content: center;
   position: absolute;
   width: 90%;
+  max-width: 36rem;
 
   /* height: 100%; */
 
@@ -134,6 +135,7 @@ header {
   z-index: 1;
 
   /* border: 2px solid yellow; */
+  flex-shrink: 0;
 }
 
 .card-back::before {
@@ -193,6 +195,7 @@ header {
 
   /* border: 2px solid blue; */
   top: -6.8rem;
+  flex-shrink: 0
 }
 
 .card-front::before {
@@ -266,6 +269,7 @@ form {
   justify-content: center;
   width: 100%;
   row-gap: 2rem;
+  max-width: 34.3rem;
 
   /* border: 2px solid orange; */
 }
@@ -413,3 +417,114 @@ span.form-error {
 input.form-error {
   border-color: var(--clr-red);
 }
+
+@media screen and (min-width: 1000px) {
+
+  body {
+    flex-direction: row;
+  }
+
+  .app-wrapper {
+    flex-direction: row;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      position: relative;
+  }
+  header {
+    background-image: url('./assets/bg-main-desktop.png');
+    flex-direction: row;
+    width: 33.3vw;
+    max-width: 48.3rem;
+    min-height: 100vh;
+  }
+
+  .card-wrapper {
+    flex-direction: column-reverse;
+    /* width: 100%; */
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 33%;
+    top: unset;
+    width: 150%;
+    row-gap: 2.7rem;
+    max-width: 54.1rem;
+  }
+
+.card-back {
+  align-self: flex-end;
+  /* width: 44.7rem; */
+  width: 82%;
+  aspect-ratio: 1.82;
+  /* height: 24.5rem; */
+  height: auto;
+}
+
+.card-front {
+  align-self: flex-start;
+  /* width: 44.7rem; */
+  width: 82%;
+aspect-ratio: 1.82;
+  /* height: 24.5rem; */
+  height: auto;
+  top: unset;
+}
+
+.card-front--logo > img {
+  /* width: 5.4rem;
+  height: 3rem; */
+
+  width: 8.4rem;
+height: 4.7rem;
+
+  /* border: 2px solid red; */
+}
+
+.card-front--card-numbers {
+font-size: clamp(var(--fs-hd-lg), 2vw, var(--fs-hd-xl));
+line-height: clamp(var(--lh-hd-lg), 2.5vw, var(--lh-hd-xl));
+letter-spacing: clamp(var(--ls-hd-lg), 0.1vw, var(--ls-hd-xl));
+}
+
+.card-front--card-holder {
+
+  font-size: clamp(var(--fs-bd-sm-md), 1vw, var(--fs-bd-lg));
+  line-height: clamp(var(--lh-bd-sm-md), 2.5vw, var(--lh-bd-lg));
+  letter-spacing: clamp(var(--ls-bd-sm-md), 0.1vw, var(--ls-bd-lg));
+/* }
+font-size: var(--fs-bd-lg);
+line-height: var(--lh-bd-lg);
+letter-spacing: var(--ls-bd-lg); */
+}
+
+.card-back--card-sec {
+
+  font-size: clamp(var(--fs-bd-sm-md), 1vw, var(--fs-bd-lg));
+  line-height: clamp(var(--lh-bd-sm-md), 2.5vw, var(--lh-bd-lg));
+  letter-spacing: clamp(var(--ls-bd-sm-md), 0.1vw, var(--ls-bd-lg));
+
+  /* font-size: var(--fs-bd-lg);
+  line-height: var(--lh-bd-lg);
+  letter-spacing: var(--ls-bd-lg); */
+}
+
+  main {
+    flex-direction: row;
+    /* width: 100%; */
+    padding: 0;
+    min-height: 100vh;
+  }
+  form {
+    position: relative;
+    /* flex-direction: row; */
+    /* min-width: 34.3rem; */
+    width: 45%;
+    row-gap: 2rem;
+    max-width: 38.1rem;
+    margin-left: 12.7rem;
+  }
+
+}
+
