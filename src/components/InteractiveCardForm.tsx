@@ -3,27 +3,32 @@ import { SubmitErrorHandler, SubmitHandler, UseFormReturn } from 'react-hook-for
 import { CardForm } from '../types/Types'
 import MaskedInput from 'react-input-mask'
 
-const Form = (props: {
+const InteractiveCardForm = (props: {
   methods: UseFormReturn<CardForm>
-  card: CardForm | undefined
   setCard: React.Dispatch<React.SetStateAction<CardForm | undefined>>
-  isCompleted: boolean
   setIsCompleted: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isDirty, isValid, isSubmitSuccessful },
+    reset,
     setValue,
   } = props.methods
-  const { card, setCard, isCompleted, setIsCompleted } = props
+  const { setCard, setIsCompleted } = props
   const onSubmitHandler: SubmitHandler<CardForm> = (data: CardForm) => {
     setCard(data)
     setIsCompleted(isSubmitSuccessful)
+    reset()
   }
 
   const onErrorHandler: SubmitErrorHandler<CardForm> = (error: any) =>
-    console.error(error, isDirty, isValid)
+    console.error(
+      `🚀 ~ file: InteractiveCardForm.tsx ~ line 27 ~ error, isDirty, isValid`,
+      error,
+      isDirty,
+      isValid
+    )
 
   return (
     <form onSubmit={handleSubmit(onSubmitHandler, onErrorHandler)}>
@@ -42,7 +47,6 @@ const Form = (props: {
               value: /^[a-zA-Z .]+$/,
               message: 'Wrong format; letters, spaces, and periods only',
             },
-            // validate: (value) => value.length || "Can't be blank",
             onChange: (e) => setValue('name', e.target.value),
           })}
         />
@@ -51,8 +55,8 @@ const Form = (props: {
       <div className="form--label-input-container form--card-number-container">
         <label htmlFor="card-number">Card Number</label>
         <MaskedInput
+          type="text"
           id="card-number"
-          // maskPlaceholder="e.g. 1234 5678 9123 0000"
           aria-invalid={errors?.numbers ? 'true' : 'false'}
           className={errors?.numbers ? 'form-error' : ''}
           mask="9999 9999 9999 9999"
@@ -69,7 +73,7 @@ const Form = (props: {
       </div>
       <div className="form--row-container form--card-expiry-sec-container">
         <div className="form--label-input-container form--card-expiry-container">
-          <label htmlFor="card-expiry">Exp. Date (MM/YY)</label>
+          <label htmlFor="card-expiry--mm">Exp. Date (MM/ YY)</label>
           <div className="form--row-container">
             <input
               type="text"
@@ -86,10 +90,6 @@ const Form = (props: {
                 pattern: { value: /^[0-9]{1,2}$/, message: 'Wrong format; digits only' },
                 required: "Can't be blank",
                 onChange: (e) => setValue('monthExp', e.target.value),
-                // setValueAs: (value: string) => {
-                //   console.log(value)
-                //   return value.length === 1 && parseInt(value) <= 9 ? value.padStart(1, '0') : value
-                // },
               })}
             />
             <input
@@ -102,15 +102,9 @@ const Form = (props: {
               {...register('yearExp', {
                 minLength: { value: 1, message: 'Must be 2 digits' },
                 maxLength: { value: 2, message: 'Must be 2 digits' },
-                // min: 1,
-                // max: 12,
                 pattern: { value: /^[0-9]{2}$/, message: 'Wrong format; digits only' },
                 required: "Can't be blank",
                 onChange: (e) => setValue('yearExp', e.target.value),
-                // setValueAs: (value: string) => {
-                //   console.log(value)
-                //   return value.length === 1 && parseInt(value) <= 9 ? value.padStart(1, '0') : value
-                // },
               })}
             />
           </div>
@@ -147,4 +141,4 @@ const Form = (props: {
   )
 }
 
-export default Form
+export default InteractiveCardForm

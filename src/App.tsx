@@ -1,9 +1,9 @@
 import Header from './components/Header'
-import Form from './components/Form'
+import InteractiveCardForm from './components/InteractiveCardForm'
 import { useState } from 'react'
 import { CardForm } from './types/Types'
 import { useForm } from 'react-hook-form'
-import Completed from 'components/Completed'
+import CompletedForm from 'components/CompletedForm'
 
 function App() {
   const [card, setCard] = useState<CardForm | undefined>()
@@ -17,7 +17,7 @@ function App() {
       <Header watchCardForm={watchAll} formErrors={formMethods.formState.errors} card={card} />
       <main>
         {isCompleted ? (
-          <Completed
+          <CompletedForm
             methods={formMethods}
             card={card}
             setCard={setCard}
@@ -25,11 +25,9 @@ function App() {
             setIsCompleted={setIsCompleted}
           />
         ) : (
-          <Form
+          <InteractiveCardForm
             methods={formMethods}
-            card={card}
             setCard={setCard}
-            isCompleted={isCompleted}
             setIsCompleted={setIsCompleted}
           />
         )}
