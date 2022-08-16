@@ -16,7 +16,6 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "test": "jest",
     "serve": "vite preview",
     "commit": "git-cz",
     "format": "prettier --write --ignore-unknown .",
