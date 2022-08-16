@@ -1,6 +1,6 @@
 # Drop-in Replacement for [CRA](http://create-react-app.dev/) but powered by [Vite](https://vitejs.dev/)
 
-### Things in CRA, supported here:
+### Things in CRA, supported here
 
 - Import SVG's directly as React Component via SVGR
 - Unit Testing via Jest & React Testing Library
@@ -64,7 +64,7 @@ degit uchihamalolan/vite-react-ts your-app-name
 
 ---
 
-# Other Recommended Libraries:
+# Other Recommended Libraries
 
 ### Forms
 
