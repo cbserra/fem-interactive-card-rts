@@ -2,7 +2,14 @@
   "editor.tabSize": 2,
   "editor.formatOnSaveMode": "modificationsIfAvailable",
   "editor.formatOnSave": true,
-  "prettier.documentSelectors": ["*.html", "*.{tsx,ts}", "*.{jsx,js}", "*.{css,scss,less}", "*.json", "*.md"],
+  "prettier.documentSelectors": [
+    "*.html",
+    "*.{tsx,ts}",
+    "*.{jsx,js}",
+    "*.{css,scss,less}",
+    "*.json",
+    "*.md"
+  ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "stylelint.packageManager": "pnpm",
+  "stylelint.packageManager": "pnpm"
 }
