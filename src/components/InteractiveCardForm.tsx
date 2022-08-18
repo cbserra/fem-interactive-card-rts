@@ -11,15 +11,14 @@ const InteractiveCardForm = (props: {
   const {
     register,
     handleSubmit,
-    formState: { errors, isDirty, isValid, isSubmitSuccessful },
-    reset,
+    formState: { errors, isDirty, isValid },
     setValue,
   } = props.methods
+
   const { setCard, setIsCompleted } = props
   const onSubmitHandler: SubmitHandler<CardForm> = (data: CardForm) => {
     setCard(data)
-    setIsCompleted(isSubmitSuccessful)
-    reset()
+    setIsCompleted(isValid)
   }
 
   const onErrorHandler: SubmitErrorHandler<CardForm> = (error: any) =>

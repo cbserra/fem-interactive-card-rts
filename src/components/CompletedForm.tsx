@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { UseFormReturn, SubmitHandler } from 'react-hook-form'
 import { CardForm } from 'types/Types'
 import completedLogo from '../assets/icon-complete.svg'
@@ -10,25 +10,23 @@ const CompletedForm = (props: {
   isCompleted: boolean
   setIsCompleted: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
+  const { methods, setCard, isCompleted, setIsCompleted } = props
   const {
     handleSubmit,
     formState: { errors, isDirty, isValid, isSubmitSuccessful },
     reset,
-  } = props.methods
-  const { setCard, setIsCompleted } = props
+  } = methods
+
+  useEffect(() => {
+    if (isCompleted) {
+      reset()
+    }
+  }, [isCompleted, reset])
 
   const onSubmitHandler: SubmitHandler<any> = (data: any): void => {
-    setCard(undefined)
+    setCard({} as CardForm)
     setIsCompleted(false)
     reset()
-    console.log(
-      `data=${data}`,
-      `isDirty=${isDirty}`,
-      `isValid=${isValid}`,
-      `isSubmitSuccessful=${isSubmitSuccessful}`,
-      `reset=${reset}`,
-      `errors=${errors}`
-    )
   }
 
   return (

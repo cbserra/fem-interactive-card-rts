@@ -1,6 +1,6 @@
 import Header from './components/Header'
 import InteractiveCardForm from './components/InteractiveCardForm'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CardForm } from './types/Types'
 import { useForm } from 'react-hook-form'
 import CompletedForm from 'components/CompletedForm'
@@ -11,6 +11,11 @@ function App() {
 
   const formMethods = useForm<CardForm>({ mode: 'onBlur', reValidateMode: 'onChange' })
   const watchAll = formMethods.watch()
+
+  useEffect(() => {
+    console.log(`🚀 ~ file: App.tsx ~ line 16 ~ useEffect ~ card`, card)
+    console.log(`🚀 ~ file: App.tsx ~ line 17 ~ useEffect ~ isCompleted`, isCompleted)
+  }, [card, isCompleted])
 
   return (
     <>
